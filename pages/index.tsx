@@ -67,9 +67,11 @@ function Result() {
 
   function calc(length: number): string {
     if (length > 16) {
-      return "1.5rem"
+      return "1.4rem"
+    } else if (length > 12) {
+      return "2.2rem"
     } else if (length > 8) {
-      return "2rem"
+      return "3rem"
     } else {
       return "4rem"
     }
