@@ -130,7 +130,7 @@ function Buttons() {
 
 export default function Index() {
   return (
-    <div className="m-4 w-[calc(750px/2)] h-[calc(1334px/2)] mx-auto bg-black rounded-[50px] text-white flex flex-col justify-end">
+    <div className="m-4 w-[calc(750px/2)] h-[calc(1334px/2)] mx-auto bg-black rounded-[50px] text-white flex flex-col justify-end border border-4">
       <Result />
       <Buttons />
     </div>
