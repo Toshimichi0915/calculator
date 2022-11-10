@@ -22,7 +22,7 @@ const state = proxy<{
   operation: null,
 })
 
-function operate(operator: string, operation: Operation | null) {
+function operate(operator: string | null, operation: Operation | null) {
   if (state.operation) {
     state.result = state.operation(state.result, state.input)
   }
@@ -119,7 +119,7 @@ function Buttons() {
       <button className={buttonStyles.item} onClick={() => operate("+", (a, b) => a + b)}>+</button>
       <button className={classNames(buttonStyles.item, buttonStyles.zero)} onClick={() => input(0)}>0</button>
       <button className={buttonStyles.item} onClick={() => { if (!state.decimal) { state.decimal = 1 } }}>.</button>
-      <button className={buttonStyles.item} onClick={() => operate("", null)}>=</button>
+      <button className={buttonStyles.item} onClick={() => operate(null, null)}>=</button>
     </div >
   )
 }
