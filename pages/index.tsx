@@ -117,7 +117,11 @@ function Buttons() {
       <button className={buttonStyles.item} onClick={() => input(2)}>2</button>
       <button className={buttonStyles.item} onClick={() => input(3)}>3</button>
       <button className={buttonStyles.item} onClick={() => operate("+", (a, b) => a + b)}>+</button>
-      <button className={classNames(buttonStyles.item, buttonStyles.zero)} onClick={() => input(0)}>0</button>
+      <button className={classNames(buttonStyles.item, buttonStyles.zero)} onClick={() => input(0)}><span style={{
+        display: "grid",
+        width: "calc(50% - 7.5px)",
+        placeItems: "center",
+      }}>0</span></button>
       <button className={buttonStyles.item} onClick={() => { if (!state.decimal) { state.decimal = 1 } }}>.</button>
       <button className={buttonStyles.item} onClick={() => operate(null, null)}>=</button>
     </div >
