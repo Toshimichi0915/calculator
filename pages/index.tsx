@@ -30,7 +30,7 @@ function operate(operator: string | null, operation: Operation | null) {
   state.operator = operator
   state.operation = operation
 
-  if (state.result == 0) {
+  if (state.result == 0 && operation) {
     state.result = state.input
   }
 
@@ -79,14 +79,27 @@ function Result() {
 
   const snapshot = useSnapshot(state)
 
-  const input = (snapshot.operator ?? "") + " " + (snapshot.input ? snapshot.input.toFixed(snapshot.decimal > 0 ? snapshot.decimal - 1 : 0) : "") + (Number.isInteger(snapshot.input) && snapshot.decimal == 1 ? "." : "")
+  let input = ""
+  if (snapshot.operator) {
+    input += snapshot.operator + " "
+  }
+
+  if (snapshot.input) {
+    input += snapshot.input.toFixed(snapshot.decimal > 0 ? snapshot.decimal - 1 : 0)
+    if (Number.isInteger(snapshot.input) && snapshot.decimal) {
+      input += "."
+    }
+  } else if (snapshot.decimal) {
+    input += "0." + "0".repeat(snapshot.decimal - 1)
+  }
+
   const result = snapshot.result.toFixed(snapshot.round > 0 ? snapshot.round - 1 : 0)
 
   return (
     <div className="px-10">
-      {snapshot.input || snapshot.operator ?
+      {snapshot.input || snapshot.decimal || snapshot.operator ?
         <p className={`text-right`} style={{ fontSize: calc(input.length) }}>{input}</p> :
-        <p className={`text-right`} style={{ fontSize: calc(result.length) }}>{result.replace(/\.?0+$/, "") || "0"}</p>
+        <p className={`text-right`} style={{ fontSize: calc(result.length) }}>{result.replace(/\.0+$/, "") || "0"}</p>
       }
     </div>
   )
